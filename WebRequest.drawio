@@ -1,0 +1,66 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.16">
+  <diagram name="Page-1" id="UvPdA-vNQ6Osh4VBpfWX">
+    <mxGraphModel dx="819" dy="441" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-16" value="HTTP GET/POST" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="ycfRCCqxJ0xfriM3vxMm-15" target="ycfRCCqxJ0xfriM3vxMm-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="360" y="20" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="260" y="20" />
+              <mxPoint x="260" y="20" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-15" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.communications.smtp_connector;" vertex="1" parent="1">
+          <mxGeometry x="30" y="10" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-17" value="" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.communications.ucwa_application;" vertex="1" parent="1">
+          <mxGeometry x="190" y="60" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-19" value="HTML/CSS/Images" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="ycfRCCqxJ0xfriM3vxMm-18">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="395" y="100" as="sourcePoint" />
+            <mxPoint x="130" y="100" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="100" />
+              <mxPoint x="330" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" edge="1" parent="1" source="ycfRCCqxJ0xfriM3vxMm-18" target="ycfRCCqxJ0xfriM3vxMm-20">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="430" y="60" />
+              <mxPoint x="430" y="60" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-28" value="SQL" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ycfRCCqxJ0xfriM3vxMm-27">
+          <mxGeometry x="0.1429" y="-1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-18" value="Web Server&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="sketch=0;pointerEvents=1;shadow=0;dashed=0;html=1;strokeColor=#b85450;fillColor=#f8cecc;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.services.web_services;fontFamily=Verdana;" vertex="1" parent="1">
+          <mxGeometry x="290" y="5" width="115" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" edge="1" parent="1" source="ycfRCCqxJ0xfriM3vxMm-20" target="ycfRCCqxJ0xfriM3vxMm-18">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="508" y="30" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-31" value="Data" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="ycfRCCqxJ0xfriM3vxMm-30">
+          <mxGeometry x="0.1291" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ycfRCCqxJ0xfriM3vxMm-20" value="" style="sketch=0;shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.databases.database_mini_2;fillColor=#2072B8;" vertex="1" parent="1">
+          <mxGeometry x="490" y="32.5" width="35" height="45" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

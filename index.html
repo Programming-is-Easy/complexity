@@ -1,0 +1,1027 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>The Many Lies of Complexity in Software Engineering</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<style type="text/css">
+			.make-it-pop {
+				filter: drop-shadow(0 0 10px purple);
+			}
+
+			.table-image {
+				display: block !important;
+				margin-left: auto !important;
+				margin-right: auto !important;
+			}
+
+			div.emphasis {
+				margin-left:auto;
+				margin-right:auto;
+				background-color:#00000066;
+				max-width:75%;
+				border:1px solid #999;
+			}
+
+			.code-emphasis code {
+				color: #ff77aa;
+			}
+
+			.polaroid a {
+				border: 2px solid #555;
+				border-radius: 4px;
+				background: rgb(255,255,244);
+				background: linear-gradient(180deg, rgba(255,255,244,1) 0%, rgba(255,255,255,1) 43%, rgba(255,255,244,1) 100%);
+				display: inline-block;
+				padding: 15px 15px 20px;
+				text-align: center;
+				text-decoration: none;
+				-webkit-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+				-moz-box-shadow: 0 4px 6px rgba(0, 0, 0, .3);
+				box-shadow: 0 8px 12px rgba(0, 0, 0, .9);
+				-webkit-transition: all .20s linear;
+				-moz-transition: all .20s linear;
+				transition: all .20s linear;
+				z-index: 0;
+				position: relative;
+				transform:rotate(-2deg);
+			}
+
+			.polaroid a:after {
+				color: #333;
+				font-size: 25px;
+				content: attr(title);
+				position: relative;
+				top: 5px;
+			}
+			.polaroid img {
+				display: block;
+				width: 200px;
+				border: 1px solid #444; /*#a19e9e;*/
+				border-radius: 2px;
+				margin:0;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			.polaroid a:hover {
+				/*
+				-webkit-transform: scale(1.2);
+				-moz-transform: scale(1.2);
+				transform: scale(1.2);
+				z-index: 10;
+				-webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
+				-moz-box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
+				box-shadow: 0 10px 20px rgba(0, 0, 0, .7);
+				*/
+			}
+		</style>
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section 
+					data-background-gradient="radial-gradient(#339966, #000)"
+					style="height:75%;">
+					<h3>The Many Lies of Complexity</h3>
+					<div style="position:fixed;bottom:0; left: 0;transform:rotate(2deg);">
+						<img width="200" src="images/clubhouse-discord.png">
+						<br><span style="color:#ff9;">Join us on Discord!</span>
+					</div>
+					<div style="position:fixed;bottom:0;right:0;">
+						<div class="polaroid">
+							<a href="https://ericharrison.info" title="Eric Harrison">
+								<img width="200" src="images/erh-square.jpg">
+							</a>
+						</div>
+					</div>
+				</section>
+
+				<section 
+					data-background-gradient="radial-gradient(#336699, #000)">
+
+					<h2>I'm Eric Harrison</h2>
+					<h4 style="text-transform:inherit;">Software Engineer, CTO, Writer, Scotch Enthusiast</h4>
+					<img width="250" src="images/erh.jpg">
+				</section>
+
+				<section>
+
+					<section 
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<img src="images/ms-logo-white-rect.png" height="200" style="margin-bottom:0;">
+						<h4>Cofounder and CTO of</h4>
+						<h3>
+							<a href="https://makestartups.com">Make Startups, Inc.</a>
+						</h3>
+						<small>Data-driven entrepreneurship support, funding, and applications.</small>
+
+						<aside class="notes">
+							Small team, big product vision. We're trying to fundamentally
+							change how people start companies in America.
+						</aside>
+					</section>
+
+					<section 
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<img src="images/docket.png" height="200" style="margin-bottom:0;">
+						<h4>Cofounder and CTO of</h4>
+						<h3>
+							Docket
+						</h3>
+						<small>Platform and system of record for Legal Teams</small>
+
+						<aside class="notes">
+							Goal was to become the "Salesforce" of Legal. Raised $1.4M 
+							and was doing quite well until the economy went weird after COVID 
+							and we ran out of runway.
+						</aside>
+					</section>
+
+					<section 
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<img src="images/moonrise.jpg" height="200" style="margin-bottom:0;">
+						<h4>Cofounder and CTO of</h4>
+						<h3>
+							Moonrise
+						</h3>
+						<p>
+							<small>
+								Gig-economy staffing platform to make it easy for everyday<br>
+								Americans to make some extra money. 
+							</small>
+						</p>
+						<ul style="font-size: 1.5rem;">
+							<li>3000+ W-2 Workers</li>
+							<li>18,000+ gigs</li>
+							<li>$1.8M in payouts</li>
+						</ul>
+
+						<aside class="notes">
+							Crushed it in the Chicago market. Became an indispensible part 
+							of thousands of workers lives as their way to make ends meet.
+							Left prior to COVID when things were booming, but post COVID helped 
+							team pivot to a "remote-jobs" model that was taking off.
+
+							Side note: anyone that is interested can make a literal fortune 
+							making it possible for anyone to become a virtual sales rep.
+						</aside>
+					</section>
+
+				</section>
+			
+
+				<section>
+					<span class="r-fit-text">I LOVE ❤️</span>
+					<p>early-stage software startups</p>
+				</section>
+
+				<section>
+					<section
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h3>I love to</h3>
+						<span class="fragment">invent new products, </span>
+						<span class="fragment">build new teams, </span>
+						<span class="fragment">automate boring tasks, </span>
+						<span class="fragment">improve efficiencies, </span>
+						<span class="fragment">design complex systems...</span>
+						<p class="fragment">
+							<p class="fragment grow highlight-blue r-fit-text">Write Software</span>
+						</p>
+					</section>
+
+					<aside class="notes">
+						I am someone who searches for opportunities to build something <strong>new</strong>.
+						I love being the first engineer. I love building the MVP. I love picking the 
+						tech stack. Once the product exists, the team is huge, and we have product 
+						managers calling the shots, I start looking for my next company to build.
+					</aside>
+				</section>
+
+				<section
+					data-background-gradient="radial-gradient(#336699, #000)">
+
+					<section
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h2>Modern Web Development</h2>
+						<p class="fragment r-fit-text">is too complex</p>
+					</section>
+					
+					<section
+						data-background-transition="zoom"
+						data-background-color="rgb(181, 83, 60)">
+						<h3> Programming is</h3>
+						<h2 class="r-fit-text" style="color:#ffff96;">
+							supposed to be
+						</h2>
+						<h1 style="color:#fdd;">
+							Easy
+						</h1>
+						<img width="200" src="images/ez-logo.jpg">
+					</section>
+
+				</section>
+
+				<section
+					data-background-gradient="radial-gradient(#336699, #000)">
+					<h4>Library Overload</h4>
+
+					<aside class="notes">
+						To say absolutely nothing of CSS framework loyalty. The tailwind folks hate 
+						the bootstrap folks. Everyone hates Wordpress people. Meanwhile, jQuery is sitting 
+						by himself in the corner eating glue with a spoon. It's absolutely nuts.
+					</aside>
+
+					<table>
+						<tbody>
+							<tr>
+								<th style="width:33%;text-align:center;">Front End</th>
+								<th style="width:33%;text-align:center;">Back End</th>
+								<th style="width:33%;text-align:center;">Infra</th>
+							</tr>
+							<tr>
+								<td style="vertical-align:top;background-color:#00000066;">
+									<img src="images/libraries/react.png" width="120" class="table-image">
+									<img src="images/libraries/angular.png" width="120" class="table-image">
+									<img src="images/libraries/vue.png" width="80" class="table-image">
+									<img src="images/libraries/svelte.png" width="80" class="table-image">
+								</td>
+								<td style="vertical-align:top;background-color:#00000066;border-left:1px solid #aaa;">
+									<img src="images/libraries/react.png" width="120" class="table-image">
+									<img src="images/libraries/t3-light.svg" width="60" class="table-image">
+									<img src="images/libraries/django.jfif" width="120" class="table-image">
+									<img src="images/libraries/laravel.png" width="120" class="table-image">
+									<img src="images/libraries/nextjs.png" width="120" class="table-image">
+									<img src="images/libraries/rails.png" width="120" class="table-image">
+								</td>
+								<td style="vertical-align:top;background-color:#00000066;border-left:1px solid #aaa;">
+									<img src="images/libraries/vercel.jpg" width="120" class="table-image">
+									<img src="images/libraries/aws.png" width="120" class="table-image">
+									<img src="images/libraries/lambda.png" width="80" class="table-image">
+									<img src="images/libraries/docker.png" width="120" class="table-image">
+									<img src="images/libraries/kubernetes.png" width="120" class="table-image">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					
+				</section>
+
+				<section data-background-color="rgb(181, 83, 60)">
+
+					<section
+						data-background-transition="convex">
+						<h2 class="r-fit-text">This is stupid.</h2>
+
+						<aside class="notes">
+							To say absolutely nothing of CSS framework loyalty. The tailwind folks hate 
+							the bootstrap folks. Everyone hates Wordpress people. Meanwhile, jQuery is sitting 
+							by himself in the corner eating glue with a spoon. It's absolutely nuts.
+						</aside>
+					</section>
+
+					<section data-background-color="#191919" data-background-transition="fade">
+						<img src="images/jurassic-park-meme.jpg" class="r-stretch">
+					</section>
+					
+					<section data-background-color="#191919" data-background-transition="fade">
+						<img src="images/compiling.png">
+						<p>credit: <a href="https://xkcd.com/303">xkcd #303</a></p>
+					</section>
+
+				</section>
+				
+				<section data-background-color="#339966">
+
+					<section
+						data-background-transition="convex">
+						<h1 class="r-fit-text">The Many Lies of Complexity</h1>
+						<h4 style="color:#eee;text-transform:capitalize;">
+							<i style="text-transform:lowercase;font-style:italic;">or</i>, 
+							how to get off the crazy treadmill of weird software development practices 
+							that don't make any sense... like, WHY are we <u>compiling</u> web apps now? Who decided
+							that was a good idea?
+						</h4>
+
+					</section>
+
+					<section data-background-color="rgb(181, 83, 60)" data-background-transition="fade">
+						<h1>WARNING ⚠️</h1>
+						<p>
+							Obviously, this entire talk is my opinion, and that's from someone that has been
+							a professional software engineer for over 25 years.
+						</p>
+
+						<img src="images/out-of-touch.png" class="r-stretch">
+
+						<aside class="notes">
+							If I hit your beloved tech stack with an arrow, I hope you don't take offense. 
+							In every single slide, imagine if there's a giant caveat surrounding it of "in some circumstances".
+							I briefly had a job where I worked as a professional Microsoft Access developer and actually 
+							built a massive application for a very large Dept. of Defense facility. Like... the entire app 
+							was in MS Access. And the database was MySQL. We were using a database to build a front-end for a 
+							database. 
+
+							It is impossible for me to ever say anything to you to justify whomever made that decision.
+						</aside>
+
+					</section>
+					
+				</section>
+				<!-- LIE 1 -->
+				<section
+					data-background-gradient="radial-gradient(#336699, #000)"
+					data-background-transition="concave">
+
+					<section
+						data-background-transition="fade"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h3 class="r-fit-text">Lie 1:</h3>
+						<h3 class="r-fit-text">It's the only way to scale</h3>
+					</section>
+					
+					<section
+						data-background-transition="slide"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h3 class="r-fit-text">You are NOT Facebook</h3>
+						<div class="emphasis">
+							<h4>You won't have:</h4>
+							<ol style="font-size:1.8rem;">
+								<li>32,000+ teammates.</li>
+								<li>Billions of users.</li>
+								<li>Tons of different installations.</li>
+								<li>World-wide deployment.</li>
+							</ol>
+						</div>
+
+						<aside class="notes">
+							The problems that organizations like Facebook and Google have 
+							to deal with are astronomically hard. If you're building a new 
+							startup, your only advantage is speed. You can write code faster,  
+							ship sooner, and do more with less.
+
+							Don't get fooled into using their tech stack, or else you're 
+							giving up your only method of beating them.
+						</aside>
+
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)"
+						data-background-transition="convex">
+						<h3 class="r-fit-text">Solution 1</h3>
+						<h3 class="r-fit-text">Just build the damned thing.</h3>
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)">
+						<h3 class="r-fit-text">Prioritize Speed</h3>
+						<ul>
+							<li>Go as fast as you can.</li>
+							<li>Ignore shiny things.</li>
+							<li>Focus on the business problem.</li>
+							<li>Build what your customers want.</li>
+						</ul>
+						<br><br>
+						<p>Solve scaling when you REACH scale.</p>
+						<h3>Everything else is just <u>noise</u>.</h3>
+
+						<aside class="notes">
+							The only thing that matters is how quickly you can build 
+							something that people want to use... solve a real problem...
+							that they are willing to pay you to fix. The faster you can 
+							iterate on that, the greater your chance of success.
+						</aside>
+					</section>
+
+
+					<section
+						data-background-transition="concave"
+						data-background-gradient="radial-gradient(#336699, #000)">
+
+						<img src="images/played-yourself.png" class="r-stretch">
+
+						<aside class="notes">
+							Facebook needs React because they're a giant team 
+							building a complex system that needs to work on billions of computers,
+							phones, and little "Like" widgets deployed all over the world.
+
+							Their problems, at scale, are not your problems. If the first thing 
+							your team reaches for is React, I question your decision-making abilities.
+							
+							You are training a generation of developers to be good developers for Facebook 
+							(and other companies that have drank the Kool-aid)
+						</aside>
+
+					</section>
+				</section>
+
+				<!-- LIE 2 -->
+				<section
+					data-background-gradient="radial-gradient(#336699, #000)"
+					data-background-transition="concave">
+
+					<section
+						data-background-transition="fade"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h3 class="r-fit-text">Lie 2:</h3>
+						<h3 class="r-fit-text">It's the best way to build.</h3>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section
+						data-background-transition="fade"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<img class="r-stretch" src="images/ibm.webp">
+
+						<aside class="notes">
+							This old adage seems to get everyone in trouble. If you're 
+							in a position to pick your tech stack, do you reach for the right one 
+							or the one that you think you should pick?
+						</aside>
+					</section>
+
+					<section
+						data-background-transition="slide"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<img class="r-stretch" src="images/greenfield-app.png" style="margin-bottom:0;">
+						<small>
+							ThePrimeagen - 
+							<a href="https://x.com/ThePrimeagen/status/1832543654633718178">
+								x.com/ThePrimeagen/status/1832543654633718178
+							</a>
+						</small>
+
+						<aside class="notes">
+							This was one of the biggest inspirations for this talk. Obviously, 
+							we can have a good faith understanding that this person is probably just building 
+							a lightweight web-based CRUD app and is talking about his preferred stack.
+						</aside>
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)"
+						data-background-transition="convex">
+						<h3 class="r-fit-text">Solution 2</h3>
+						<h3 class="r-fit-text">Build with <u style="color:#ff9;">anything</u></h3>
+
+						<aside class="notes">
+							As engineers, our job is to solve business problems with 
+							technology. We are not being paid to write the best Tailwind classes.
+							Business leaders don't care, and neither do your users. They just 
+							want you to solve their problems. The technology doesn't matter to 
+							anyone but you (and your team).
+						</aside>
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)">
+						<h3 class="r-fit-text">Pick the smallest version and iterate:</h3>
+						<ul>
+							<li>Your favorite language</li>
+							<li>Your favorite database</li>
+							<li>A single cheap VPS for server and database</li>
+							<li>Use a framework if you have no other choice</li>
+						</ul>
+						<br><br>
+						<h4>Sometimes... you don't even have to "build"</h4>
+
+						<aside class="notes">
+							The stack doesn't matter, so dogmatic adherance is the behavior 
+							of someone stuck in a cult. What is your favorite language? What 
+							stack are you fastest with? Do you need that complexity? Does something 
+							exist that will get you close for your MVP?
+						</aside>
+					</section>
+
+					<section 
+						data-background-color="#339966">
+						<h3 class="r-fit-text">What is the best tech stack for building an e-commerce site?</h3>
+
+						<div class="fragment">
+							<img src="images/shopify.png" class="r-stretch">
+						</div>
+
+						<aside class="notes">
+							If your job is to launch a store, don't build a store until you're Amazon.
+							Just pick Shopify or WooCommerce or Wix or Squarespace. Let someone else 
+							worry about the nonsense. Focus on your design, customer experience, and 
+							fulfillment.
+						</aside>
+					</section>
+
+					<section
+						data-background-transition="concave"
+						data-background-gradient="radial-gradient(#336699, #000)">
+
+						<img src="images/played-yourself.png" class="r-stretch">
+
+						<aside class="notes">
+							Facebook needs React because they're a giant team 
+							building a complex system that needs to work on billions of computers,
+							phones, and little "Like" widgets deployed all over the world.
+
+							Their problems, at scale, are not your problems. If the first thing 
+							your team reaches for is React, I question your decision-making abilities.
+							
+							You are training a generation of developers to be good developers for Facebook 
+							(and other companies that have drank the Kool-aid)
+						</aside>
+
+					</section>
+				</section>
+
+				<!-- LIE 3 -->
+				<section
+					data-background-gradient="radial-gradient(#336699, #000)"
+					data-background-transition="concave">
+
+					<section
+						data-background-transition="fade"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h3 class="r-fit-text">Lie 3+:</h3>
+						<h3 class="r-fit-text">It's the best way to build.</h3>
+
+						<aside class="notes">
+							This is straying into opinion territory, but there is a payoff 
+							so please bare with me.
+						</aside>
+					</section>
+
+					<section>
+						<h4>1. Hello World in HTML</h4>
+						<pre><code data-trim data-noescape class="language-html">
+&lt;html>
+	&lt;head>
+		&lt;title>Hello World!&lt;/title>
+	&lt;/head>
+	&lt;body>
+		&lt;h2>Hello world!&lt;/h2>
+	&lt;/body>
+&lt;/html>
+						</code></pre>
+					</section>
+
+					<section>
+						<h4>2. Hello World with NextJS (Part 1)</h4>
+						<pre><code data-trim data-noescape class="language-javascript">
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode
+}) {
+	return (
+		&lt;html>
+			&lt;head>
+				&lt;title>Hello World!&lt;/title>
+			&lt;/head>
+			&lt;body>
+				{children}
+			&lt;/body>
+		&lt;/html>
+	)
+}
+						</code></pre>
+						<small>
+							<code>app/layout.tsx</code>
+						</small>
+					</section>
+
+					<section>
+						<h4>2. Hello World with NextJS (Part 2)</h4>
+						<pre><code data-trim data-noescape class="language-javascript">
+export default function Page() {
+	return &lt;h2>Hello World!&lt;/h2>
+}
+						</code></pre>
+						<small>
+							<code>app/page.tsx</code>
+						</small>
+
+						<aside class="notes">
+							Is this a fair comparison? Sure, the crappy hello world in HTML 
+							from above was a single file, but this version gives us the ability 
+							to have pages get routed in from a separate file so that now you can 
+							start building more complex apps.
+						</aside>
+					</section>
+
+					<section
+						data-background-transition="fade"
+						data-background-gradient="radial-gradient(#336699, #000)">
+						<h3 class="r-fit-text">But Really...</h3>
+
+						<aside class="notes">
+							Is this a fair comparison? Sure, the crappy hello world in HTML 
+							from above was a single file, but this version gives us the ability 
+							to have pages get routed in from a separate file so that now you can 
+							start building more complex apps.
+						</aside>
+					</section>
+
+					<section>
+						<h4>3. Hello World with PHP</h4>
+						<pre><code data-trim data-noescape data-line-numbers="1-8|6" class="language-php">
+	
+&lt;html>
+	&lt;head>
+		&lt;title>Hello World!&lt;/title>
+	&lt;/head>
+	&lt;body>
+		&lt;?php include_once 'sub-page.php'; ?>
+	&lt;/body>
+&lt;/html>
+						</code></pre>
+						<small>
+							<code>index.php</code>
+						</small>
+
+						<aside class="notes">
+							But they sure have made 1999 era PHP painful. The problem is not the language 
+							or the architecture, or the code... it's that our entire industry has lost 
+							it's freaking mind and thinks that choosing React as the default 
+							choice before you have React-level problems makes any sense.
+
+							If you're building a mobile app and want to use React-Native, knock yourself out.
+							That is a valid React problem. If you have a team of 1000 engineers all working on 
+							multiple dynamic front-ends fed by a massive data-center-sized API that needs 
+							to process millions of concurrent requests, sure, React is a great choice.
+
+							But don't just pick it because everyone else did. 
+						</aside>
+					</section>
+
+					<section>
+						<h2>The Graveyard of Technology</h2>
+
+						<div style="vertical-align:top;background-color:#00000066;border-left:1px solid #aaa;">
+							<img src="images/libraries/flash.png" width="120">
+							<img src="images/libraries/dreamweaver.png" width="120">
+							<img src="images/libraries/coldfusion.png" width="120">
+							<img src="images/libraries/jquery.png" width="120">
+							<img src="images/libraries/prototype.jfif" width="120">
+							<img src="images/libraries/yui.webp" width="140">
+							<img src="images/libraries/bootstrap.png" width="120">
+							<div class="fragment">
+								<div style="color:#999;">coming soon...</div>
+								<img src="images/libraries/react.png" width="248">
+							</div>
+						</div>
+	
+						<aside class="notes">
+							Maybe React will stick around. Maybe the TypeScript spec will get added to ECMAScript 
+							and we'll actually have types in Javascript. 
+
+							But most likely, we'll take the good bits, throw away everything else and all move over 
+							to the "next big thing" and leave millions of crappy engineering jobs floating around 
+							supporting React 14 code because it's not worth it to your company to update for an internal 
+							tool.
+
+							Fall in love with engineering, not following the crowd.
+						</aside>
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)"
+						data-background-transition="convex">
+						<h3 class="r-fit-text">Solution 3</h3>
+						<h3 class="r-fit-text">Build with Simplicity</h3>
+
+						<aside class="notes">
+							As engineers, our job is to solve business problems with 
+							technology. We are not being paid to write the best Tailwind classes.
+							Business leaders don't care, and neither do your users. They just 
+							want you to solve their problems. The technology doesn't matter to 
+							anyone but you (and your team).
+						</aside>
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)">
+						<h3 class="r-fit-text"></h3>
+						<p>
+							Your job is to solve a business problem with software. 
+						</p>
+						<p>
+							Pick your favorite language, grab a nice looking template, 
+							and just get cranking.
+						</p>
+
+						<aside class="notes">
+						</aside>
+					</section>
+
+					<section 
+						data-background-color="rgb(181, 83, 60)">
+						<h3 class="r-fit-text">Outcomes</h3>
+						<div style="text-align:left;">
+						<p>
+							1. You will fail.
+						</p>
+						<p>
+							2. You will succeed.
+						</p>
+						<p>
+							3. You will pivot.
+						</p>
+						</div>
+
+						<aside class="notes">
+							If you fail, no big deal. You didn't spend a lot of time 
+							or energy on this thing.
+
+							If you succeed, great, keep building.
+
+							If you pivot, great, keep building.
+
+							If you reach a point where you need asynchronous processing, sure, add a 
+							microservice. But don't go all-in on AWS Lambdas yet. Just write a little bash script 
+							to do the heavy lifting. You don't need a message bus talking to a pipeline, you just need 
+							a script that looks for a database status and operates on a record.
+						</aside>
+					</section>
+
+					<section>
+						<h4>Example</h4>
+						<pre><code data-trim data-noescape data-line-numbers="1-7|5|6">
+#!/bin/sh 
+
+echo "Starting MARS Recruiter..."
+while [ true ]; do
+	cd microservice/ && node recruiter.js
+	sleep 1
+done
+						</code></pre>
+						<small>
+							<code>mars.sh</code>
+						</small>
+					</section>
+					
+					<section>
+						<h4>Heavy Lifting Script</h4>
+						<pre><code data-trim data-noescape data-line-numbers="1-19|1-5|7-8|10-17|18" style="font-size:1.3rem;">
+require("dotenv").config();
+const mysql = require("mysql2/promise");
+const connection = await mysql.createConnection({
+	/* db connection info */
+});
+
+const query = "SELECT id FROM shifts WHERE status = 'open' LIMIT 1";
+const [rows,_fields] = await connection.execute(query);
+
+if ( rows ) {
+	const processing_query = `
+		UPDATE shifts 
+		SET status = 'processing' 
+		WHERE id = ?
+	`;
+	await connection.execute(processing_query, [rows[0].id]);
+
+	/*  ... actually offer this shift to someone... */
+}
+
+						</code></pre>
+						<small>
+							<code>recruiter.js</code>
+						</small>
+					</section>
+
+				</section>
+					
+				<section 
+					data-background-color="#339966">
+					<h3 class="r-fit-text">Get it working</h3>
+					<p>Optimize if you must.</p>
+
+					<aside class="notes">
+						Chances are high that the thing you're building will never see 
+						the light of day. If you're writing it in React because you're trying 
+						to learn React, go nuts. But don't write it in React because that's the best 
+						tool for the job. It almost never is.
+					</aside>
+				</section>
+
+				<section 
+					data-background-color="#336699">
+					<h3 class="r-fit-text">Stick with standards</h3>
+					<p>Native technologies are amazing today.</p>
+
+					<aside class="notes">
+						Browsers are fast as hell. Even the JS engines in the browser 
+						are fast. Before reaching for some giant bloated framework or library, 
+						give native code a try first. 
+					</aside>
+				</section>
+
+				<section 
+					data-background-color="#993366">
+					<h3 class="r-fit-text">Progressive Enhancement still rocks!</h3>
+					<p>htmx has changed the game!</p>
+					<img src="images/libraries/htmx.png" width="250">
+
+					<aside class="notes">
+						You can cut out tons of "front-end" complexity, push off the need to scale,
+						and create a joyful user experience using a lightweight library like htmx.
+
+						But Eric, isn't that just another freaking framework? You just finished talking about 
+						this for the past 20 minutes and ranting like a loon!
+					</aside>
+				</section>
+
+				<section 
+					data-background-color="#333333">
+
+					<section>
+						<h3 class="r-fit-text">htmx in 1 minute</h3>
+						<p>
+							htmx exists as a library to ask:
+						</p>
+						<ul style="font-size:1.7rem;" class="code-emphasis">
+							<li>Why should only <code>&lt;a></code> and <code>&lt;form></code> be able to make HTTP requests?</li>
+							<li>Why should only <code>click</code> and <code>submit</code> events trigger requests?</li>
+							<li>Why should only <code>GET</code> and <code>POST</code> methods be available?</li>
+							<li>Why does a request need to replace the entire screen?</li>
+						</ul>
+
+						<aside class="notes">
+							htmx asks these questions
+						</aside>
+					</section>
+
+					<section>
+						<h3>htmx in 1 minute</h3>
+						<p>
+							Every Element is replaceable
+						</p>
+						<pre><code data-trim data-noescape data-line-numbers="1-8|4-8|5|6" class="language-html">
+&lt;div id="parent_el">
+	&lt;h4>Blog Title&lt;/h4>
+	&lt;p>Blog content goes here. Hopefully you're a good writer.&lt;/p>
+	&lt;button class="btn"
+		hx-target="#parent_el" 
+		hx-get="/edit" 
+	>Click to Edit Post&lt;/button>
+&lt;/div>
+						</code></pre>
+					</section>
+
+					<section>
+						<h3 class="code-emphasis"><code>/edit</code> HTML Partial</h3>
+						<pre><code data-trim data-noescape data-line-numbers="1-10|1-3|1,4-5|1-10" class="language-html">
+&lt;form 
+	method="post"
+	action="/save" 
+	hx-post="/save"
+	hx-target="#parent_el">
+	&lt;label for="title">Title:&lt;/label>
+	&lt;input type="text" name="title" id="title">
+	&lt;textarea name="content">&lt;/textarea>
+	&lt;input type="submit" value="Save Post">
+&lt;/form>
+						</code></pre>
+						<small>This tiny bit of HTML is all you send back to the client.</small>
+					</section>
+				
+					<section>
+						<h3>Rendered Update</h3>
+						<p class="code-emphasis">
+							The <code>.innerHTML</code> of <code>#parent_el</code>
+						</p>
+						<pre><code data-trim data-noescape data-line-numbers="1,12|2-11|1-12" class="language-html">
+&lt;div id="parent_el">
+	&lt;form 
+		method="post"
+		action="/save" 
+		hx-post="/save"
+		hx-target="#parent_el">
+		&lt;label for="title">Title:&lt;/label>
+		&lt;input type="text" name="title" id="title">
+		&lt;textarea name="content">&lt;/textarea>
+		&lt;input type="submit" value="Save Post">
+	&lt;/form>
+&lt;/div>
+						</code></pre>
+					</section>
+				
+					<section>
+						<h3 class="code-emphasis"><code>POST /save</code></h3>
+						<p class="code-emphasis">
+							Then, when the form is submitted to <code>/save</code>,
+							simply return back the originally rendered template, now with 
+							your changes.
+						</p>
+						<pre><code data-trim data-noescape data-line-numbers="2-7|2|3|1-8" class="language-html">
+&lt;div id="parent_el">
+	&lt;h4>Updated Blog Title&lt;/h4>
+	&lt;p>Better words with less tpyos!&lt;/p>
+	&lt;button class="btn"
+		hx-target="#parent_el" 
+		hx-get="/edit" 
+	>Click to Edit Post&lt;/button>
+&lt;/div>
+						</code></pre>
+					</section>
+					
+					<section>
+						<h3 class="code-emphasis">Magic for Free</h3>
+						<p class="code-emphasis" style="font-size:1.2rem;">
+							htmx provides progressive enhancement, attaching new 
+							"attributes" into your HTML pages. If you're building web applications 
+							that have a sane version of routing, you can begin to compose your product 
+							through custom HTML partials generated by your preferred framework's templating
+							system.
+						</p>
+						<pre><code data-trim data-noescape data-line-numbers="1-13|3-5|7-13|9" class="language-php">
+&lt;?php
+	// inside your_app_route.php
+	if (isset($headers["HX-Request"]) ) {
+		include_once "partials/{$sub_view}.php";
+	} else {
+?>
+&lt;div class="content">
+	&lt;!-- other junk omitted -->
+	&lt;?php include_once "partials/default.php"; ?>
+&lt;/div>
+&lt;?php 
+	} // end of non-htmx template
+						</code></pre>
+					</section>
+
+
+				</section>
+
+				<section 
+					data-background-gradient="radial-gradient(#339966, #000)">
+					<h3>Do Better</h3>
+					<p>Don't contribute to the problem.</p>
+				</section>
+
+				<section 
+					data-background-gradient="radial-gradient(#993366, #000)">
+
+					<h2>Questions?</h2>
+					<h4>Eric Harrison</h4>
+				
+					<table>
+						<tbody>
+							<tr>
+								<td style="vertical-align:top;background-color:#00000066;border:1px solid #999;">
+									<ul style="list-style-type:none;">
+										<li>📧<a href="mailto:erh@makestartups.com">erh@makestartups.com</a></li>
+										<li>
+											🌐
+											<a href="https://makestartups.com">makestartups.com</a>
+										</li>
+										<li>
+											🌐
+											<a href="https://ericharrison.info">ericharrison.info</a>
+										</li>
+										<li>
+											🐦
+											<a href="https://x.com/blister">@blister</a>
+										</li>
+										<li style="text-align:center;">
+											Join us on Discord<br>
+											<img width="200" src="images/clubhouse-discord.png">
+										</li>
+									</ul>
+								</td>
+								<td style="vertical-align:top;">
+									<img src="images/erh.jpg">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
